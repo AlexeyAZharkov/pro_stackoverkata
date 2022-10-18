@@ -78,8 +78,6 @@ const sidebarText = `
                                 </a>
                             </li>
 
-
-
                             <li class="ps-relative"  aria-current="false">
 
 
@@ -102,8 +100,6 @@ const sidebarText = `
                         </ol>
                     </li>
 
-
-
                     <li>
                         <ol class="nav-links">
                         </ol>
@@ -111,17 +107,12 @@ const sidebarText = `
                 </ol>
             </nav>
         </div>
-
-
     </div>
 
-    <div id="content" class="snippet-hidden">
-
-    </div>
 `
 
 function setSidebar() {
-    mainContainer.innerHTML = sidebarText;
+    mainContainer.insertAdjacentHTML('afterbegin', sidebarText);
 }
 
 setSidebar();
