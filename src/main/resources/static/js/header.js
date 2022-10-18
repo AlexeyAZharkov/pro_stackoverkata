@@ -242,7 +242,9 @@ function setHeader() {
 }
 
 function setHead() {
-    document.head.innerHTML = headText;
+    const head = document.createElement("div");
+    head.innerHTML = headText ;
+    document.head.append(head);
 }
 
 setHead();
