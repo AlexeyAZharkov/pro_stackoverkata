@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -29,6 +30,9 @@ import java.util.Objects;
 @AllArgsConstructor
 @Table(name = "comment")
 public class Comment implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 2708371372691935141L;
 
     @Id
     @GeneratedValue(generator = "Comment_seq")

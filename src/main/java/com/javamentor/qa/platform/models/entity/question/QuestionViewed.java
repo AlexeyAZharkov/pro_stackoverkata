@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -26,6 +27,9 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 public class QuestionViewed implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 2105617225103397122L;
 
     @Id
     @GeneratedValue(generator = "QuestionViewed_seq")

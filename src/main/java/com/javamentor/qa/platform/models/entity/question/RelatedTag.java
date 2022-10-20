@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
@@ -22,6 +23,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Table(name = "related_tag")
 public class RelatedTag implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 2731043446347579526L;
 
     @Id
     @GeneratedValue(generator = "RelatedTag_seq")
