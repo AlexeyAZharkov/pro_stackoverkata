@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>User profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+
+<div class="container">
+    <div id="content" class="snippet-hidden">
+        <h1 class="font-weight-bold">Профиль пользователя</h1>
+        <form>
+
+            <div class="form-group">
+                <p class="h5 font-weight-bold">Ник пользователя${user.name}</p>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="card-body">Зарегистрировался: ${user.persistDateTime}</div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card-body">Последнее посещение: ${user.lastUpdateDateTime}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="card-body">Профиль: "/profile"</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="card-body">Активность </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="card-body">Saves </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="card-body">Настройки</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="h5 font-weight-bold">Информация о пользователе</p>
+                <textarea class="form-control" rows="5" placeholder="Пару слов о себе" id="about"></textarea>
+            </div>
+
+            <div class="form-group">
+                <p class="h5 font-weight-bold">Сообщества</p>
+                <input type="text" class="form-control" rows="3" placeholder="сообщества юзера">
+            </div>
+            <div class="form-group">
+                <p class="h5 font-weight-bold">Знаки</p>
+                <input type="text" class="form-control" rows="3" placeholder="Вы пока не заслужили ни одной ${user.badges}">
+            </div>
+            <div class="form-group">
+                <p class="h5 font-weight-bold">Сообщения</p>
+                <input type="text" class="form-control" rows="3" placeholder="Тексты наиболее интересных и ценных для сообщества сообщений">
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="/js/header.js"></script>
+<script type="text/javascript" src="/js/sidebar.js"></script>
+<script type="text/javascript" src="/js/footer.js"></script>
+
+</body>
+</html>

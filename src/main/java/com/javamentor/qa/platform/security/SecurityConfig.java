@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -56,17 +57,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 // делаем страницу регистрации недоступной для авторизированных пользователей
                 .authorizeRequests()
                 // ограничиваем доступ api/user/** - разрешен только USER
-                .antMatchers("api/user/**").hasRole("USER")
+                .antMatchers("api/user/**", "/profile" /*"/questions"*/).hasAnyRole("USER", "ADMIN")
+                .antMatchers("/**", "/login/**", "/profile", "/regpage").permitAll()
                 // всем остальным разрешаем доступ
-                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                //.successHandler(successUserHandler)
+                .loginProcessingUrl("/login")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/");
+                .permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/regpage");
     }
 
     @Override
