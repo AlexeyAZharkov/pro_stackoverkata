@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tags</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div id="content" class="snippet-hidden">
+        <div id="mainbar-full">
+            <h1>Метки</h1>
+            <p class="text">Метка — это ключевое слово, позволяющее отнести ваш вопрос в одну категорию с другими похожими вопросами. Благодаря подбору правильных меток другие участники смогут проще найти ваш вопрос и быстрее дать на него ответ.</p>
+
+            <div class="d-flex flex-wrap">
+                <a href="#" class="text-decoration-none">Показать все синонимы меток</a>
+            </div>
+            <div class="d-flex justify-content-between">
+                <div class="p-2 bd-highlight">
+                    <form class="form-inline">
+                        <input class="form-control" type="search" placeholder="Фильтрация по имени" aria-label="Search">
+                    </form>
+                </div>
+                <div class="p-2 bd-highlight">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Популярные</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Имя</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Новые</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="tags_list">
+            <div class="row row-cols-1 row-cols-md-3">
+                <div class="col mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <a href="#" class="btn btn-outline-info" id="nameTag">Name tag</a>
+                            </div>
+                            <div class="d-flex">
+                                <p class="card-text" id="descriptionTag">Description tag</p>
+                            </div>
+                            <div class="mx-auto">
+                                <div class="d-flex justify-content-between">
+                                    <p class="card-text" id="numberOfQuestionsTag"><small class="text-muted">number of questions</small></p>
+                                    <p class="card-text" id="persistDateTimeTag"><small class="text-muted">persistDateTime </small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Назад</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Далее</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<script type="text/javascript" src="/js/sidebar.js"></script>
+<script type="text/javascript" src="/js/header.js"></script>
+<script type="text/javascript" src="/js/footer.js"></script>
+</body>
+</html>
