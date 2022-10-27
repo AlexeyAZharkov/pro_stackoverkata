@@ -588,3 +588,17 @@ this.mockMvc
 ```
 
 5. Если ожидаемые результаты не совпадут, тест сообщит об ошибке и распечатает все параметры. В ином случае вы увидите сообщение о том, что тест успешно пройден.
+# Работа с профилями
+
+Доступно 2 профиля "local" и "dev". 
+
+### Как сменить профиль
+
+В файле конфигурации приложения (com.javamentor.qa.platform.webapp.configs.JmApplication.java) изменить аргумент метода profiles(1) на "local" или "dev".
+
+![](src/main/resources/static/images/git_tutor/git_profile1.png)
+### Как изменить конфигурацию базы данных
+
+В файле конфигурации приложения (com.javamentor.qa.platform.webapp.configs.JmApplication.java) изменить аргументы метода properties(1).
+
+![](src/main/resources/static/images/git_tutor/git_profile2.png)
