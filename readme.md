@@ -588,17 +588,34 @@ this.mockMvc
 ```
 
 5. Если ожидаемые результаты не совпадут, тест сообщит об ошибке и распечатает все параметры. В ином случае вы увидите сообщение о том, что тест успешно пройден.
-# Работа с профилями
+## Настройка профиля подключения к БД
 
-Доступно 2 профиля "local" и "dev". 
+Для запуска БД с локальными настройками
 
-### Как сменить профиль
+Заходим в _Edit Configuration_`->`_Configuration_`->`_Environment variables_
 
-В файле конфигурации приложения (com.javamentor.qa.platform.webapp.configs.JmApplication.java) изменить аргумент метода profiles(1) на "local" или "dev".
+![](src/main/resources/static/images/VMOption2.png)
 
-![](src/main/resources/static/images/git_tutor/git_profile1.png)
-### Как изменить конфигурацию базы данных
+![](src/main/resources/static/images/OMG.png)
 
-В файле конфигурации приложения (com.javamentor.qa.platform.webapp.configs.JmApplication.java) изменить аргументы метода properties(1).
+Вписываем в VM Option `-ea -Dspring.profiles.active=local/dev` - выбираем профиль для запуска
 
-![](src/main/resources/static/images/git_tutor/git_profile2.png)
+Environment variables `HIBERNATE_DDL=;DB_BASE=;DB_SERVER=;DB_PORT=;DB_NAME=;DB_USERNAME=;DB_PASS=`
+
+где
+
+HIBERNATE_DDL - настройка ddl
+
+DB_BASE - тип используемой БД
+
+DB_SERVER - адрес сервера (по умолчанию localhost)
+
+DB_PORT - порт
+
+DB_NAME - название БД
+
+DB_USERNAME - твой логин
+
+DB_PASS - твой пароль
+
+-ea -Dspring.profiles.active= - выбери профиль
