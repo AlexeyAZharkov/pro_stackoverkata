@@ -18,7 +18,7 @@ public class ResourceAnswerController {
 
     @ApiOperation("Пометка ответа на удаление")
     @DeleteMapping(value = "/{answerId}")
-    public ResponseEntity<?> delete(@PathVariable("answerId") Long answerId) {
+    public ResponseEntity<?> markAnswerToDelete (@PathVariable("answerId") Long answerId) {
         if (answerService.getById(answerId).isPresent()) {
             answerService.getById(answerId).get().setIsDeleted(Boolean.TRUE);
             return new ResponseEntity<>(HttpStatus.OK);
