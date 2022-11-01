@@ -7,11 +7,20 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 @Repository
 public class TagDaoImpl extends ReadWriteDaoImpl<Tag, Long> implements TagDao {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Override
+    public List<Tag> returnListTagByListTagName(List<String> name) {
+        TypedQuery<Tag> query = entityManager.createQuery("SELECT t FROM Tag t WHERE t.name =: name", Tag.class);
+        query.setParameter("name", name);
+        return query.getResultList();
+    }
 
 }
