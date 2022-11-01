@@ -11,5 +11,4 @@ public class QuestionDtoDaoImpl implements QuestionDtoDao {
 
     @PersistenceContext
     private EntityManager entityManager;
-
 }
