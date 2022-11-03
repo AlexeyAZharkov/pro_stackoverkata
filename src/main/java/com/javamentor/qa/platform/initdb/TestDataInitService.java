@@ -6,6 +6,8 @@ import com.javamentor.qa.platform.models.entity.question.answer.Answer;
 import com.javamentor.qa.platform.models.entity.user.Role;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.models.entity.user.reputation.Reputation;
+import com.javamentor.qa.platform.models.entity.user.reputation.ReputationType;
+import com.javamentor.qa.platform.service.abstracts.model.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,21 @@ import java.util.List;
 
 @Service
 public class TestDataInitService {
+    private final UserService userService;
+    private final RoleService roleService;
+    private final TagService tagService;
+    private final QuestionService questionService;
+    private final AnswerService answerService;
+    private final ReputationService reputationService;
+
+    public TestDataInitService(UserService userService, RoleService roleService, TagService tagService, QuestionService questionService, AnswerService answerService, ReputationService reputationService) {
+        this.userService = userService;
+        this.roleService = roleService;
+        this.tagService = tagService;
+        this.questionService = questionService;
+        this.answerService = answerService;
+        this.reputationService = reputationService;
+    }
 
     @Transactional
     public void createEntity() {
@@ -35,82 +52,90 @@ public class TestDataInitService {
 
 
     private void createUsers() {
+        Role role = new Role();
+        role.setName("ROLE_USER");
+        roleService.persist(role);
         User user = new User();
-        user.setId(1L);
         user.setEmail("test@mail.comm");
         user.setPassword(passwordEncoder().encode("qwe"));
-        user.setFullName("Vladikin");
-        user.setAbout("I'm mister genius");
-        user.setCity("Moscow");
-        user.setImageLink("vladikin.jpg");
-        user.setLinkGitHub("github.com");
-        user.setLinkSite("www.1007.com");
-        user.setLinkVk("vk.com");
-        user.setLastUpdateDateTime(LocalDateTime.now());
-        user.setPersistDateTime(LocalDateTime.of(2022, 10, 5, 6, 22));
+        user.setFullName("Test");
+        user.setLastUpdateDateTime(LocalDateTime.of(2022, 10, 5, 6, 22));
+        user.setPersistDateTime(LocalDateTime.now());
+        user.setNickname("Testik");
+        user.setRole(role);
         user.setIsEnabled(true);
         user.setIsDeleted(false);
-        user.setNickname("Vladik");
-        user.setRole(new Role(1L, "USER"));
+        user.setCity("Moscow");
+        user.setLinkSite("www.1007.com");
+        user.setLinkGitHub("github.com");
+        user.setLinkVk("test.vk.com");
+        user.setAbout("I'm mister genius");
+        user.setImageLink("test.jpg");
         users.add(user);
+        userService.persist(user);
     }
 
     List<Tag> tags = new ArrayList<>();
 
     private void createTags() {
         Tag tag = new Tag();
-        tag.setId(1L);
         tag.setName("Java");
         tag.setDescription("Java is simple");
         tag.setPersistDateTime(LocalDateTime.now());
+        tag.setQuestions(questions);
         tags.add(tag);
+        tagService.persist(tag);
     }
 
     List<Question> questions = new ArrayList<>();
 
     private void createQuestions() {
         Question question = new Question();
-        question.setId(1L);
         question.setTitle("Did you know?");
         question.setDescription("Interesting facts");
         question.setPersistDateTime(LocalDateTime.now());
         question.setLastUpdateDateTime(LocalDateTime.of(2022, 10, 30, 12, 33));
         question.setIsDeleted(false);
-        question.setUser(users.get(1));
+        question.setUser(users.get(0));
+        question.setTags(tags);
+        question.setCommentQuestions(null);
+        question.setAnswers(answers);
+        question.setUserFavoriteQuestions(null);
         questions.add(question);
-
+        questionService.persistAll(questions);
     }
 
     List<Answer> answers = new ArrayList<>();
 
     private void createAnswers() {
         Answer answer = new Answer();
-        answer.setId(1L);
         answer.setPersistDateTime(LocalDateTime.of(2022, 9, 2, 5, 34));
         answer.setUpdateDateTime(LocalDateTime.now());
-        answer.setQuestion(questions.get(1));
-        answer.setUser(users.get(1));
+        answer.setQuestion(questions.get(0));
+        answer.setUser(users.get(0));
         answer.setHtmlBody("html_body_for_answer");
         answer.setIsHelpful(true);
         answer.setIsDeleted(false);
         answer.setIsDeletedByModerator(false);
         answer.setDateAcceptTime(LocalDateTime.of(2022, 9, 2, 9, 10));
+        answer.setCommentAnswers(null);
+        answer.setVoteAnswers(null);
         answers.add(answer);
+        answerService.persistAll(answers);
     }
 
     List<Reputation> reputations = new ArrayList<>();
 
     private void createReputations() {
         Reputation reputation = new Reputation();
-        reputation.setId(1L);
         reputation.setPersistDate(LocalDateTime.of(2022, 7, 2, 2, 2));
-        reputation.setAuthor(users.get(1));
-        reputation.setSender(users.get(1));
+        reputation.setAuthor(users.get(0));
+        reputation.setSender(users.get(0));
         reputation.setCount(22);
-        reputation.setType(null);
-        reputation.setQuestion(questions.get(1));
-        reputation.setAnswer(answers.get(1));
+        reputation.setType(ReputationType.Question);
+        reputation.setQuestion(questions.get(0));
+        reputation.setAnswer(null);
         reputations.add(reputation);
-
+        reputationService.persistAll(reputations);
     }
 }
