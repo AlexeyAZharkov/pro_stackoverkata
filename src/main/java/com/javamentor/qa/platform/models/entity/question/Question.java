@@ -1,6 +1,5 @@
 package com.javamentor.qa.platform.models.entity.question;
 
-import com.javamentor.qa.platform.exception.ConstrainException;
 import com.javamentor.qa.platform.models.entity.question.answer.Answer;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.models.entity.user.UserFavoriteQuestion;
@@ -12,21 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
@@ -106,9 +91,9 @@ public class Question implements Serializable {
     }
 
     private void checkConstraints() {
-        if (this.tags == null || this.tags.isEmpty()) {
-            throw new ConstrainException("Экземпляр Question должен иметь в поле tags хотя бы один элемент");
-        }
+//        if (this.tags == null || this.tags.isEmpty()) {
+//            throw new ConstrainException("Экземпляр Question должен иметь в поле tags хотя бы один элемент");
+//        }
         if (this.isDeleted == null) {
             this.isDeleted = false;
         }
