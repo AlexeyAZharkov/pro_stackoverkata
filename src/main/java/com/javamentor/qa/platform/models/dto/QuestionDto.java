@@ -1,5 +1,6 @@
 package com.javamentor.qa.platform.models.dto;
 
+import com.javamentor.qa.platform.models.entity.question.VoteType;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -10,36 +11,41 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Schema(description = "вопрос")
 public class QuestionDto {
     @Parameter(description = "id вопроса")
     private Long id;
-    @Parameter(description = "заголовок вопроса")
+    @Schema(description = "заголовок вопроса")
     private String title;
-    @Parameter(description = "id автора вопроса")
+    @Schema(description = "id автора")
     private Long authorId;
-    @Parameter(description = "имя автора вопроса")
+    @Schema(description = "имя автора")
     private String authorName;
-    @Parameter(description = "аватарка автора вопроса")
+    @Schema(description = "ссылка на изображение автора")
     private String authorImage;
-    @Parameter(description = "описание автора вопроса")
+    @Schema(description = "описание вопроса")
     private String description;
-    @Parameter(description = "репутация автора вопроса")
+    @Schema(description = "количество просмотров")
+    private Long viewCount;
+    @Schema(description = "репутация автора")
     private Long authorReputation;
-    @Parameter(description = "количество ответов на вопрос")
-    private int countAnswer;
-    @Parameter(description = "количество полезных  ответов на вопрос")
-    private int countValuable;
-    @Parameter(description = "дата создания вопроса")
+    @Schema(description = "количество ответов на вопрос")
+    private Long countAnswer;
+    @Schema(description = "рейтинг вопроса")
+    private Long countValuable;
+    @Schema(description = "дата создания вопроса")
     private LocalDateTime persistDateTime;
-    @Parameter(description = "дата последней редакции вопроса или добавления ответа")
+    @Schema(description = "дата последнего обновления")
     private LocalDateTime lastUpdateDateTime;
-    @Parameter(description = "теги, которыми обозначен вопрос")
+    @Schema(description = "кол-во голосов за вопрос")
+    private Long countVote;
+    @Schema(description = "голос авторизованного пользователя за вопрос")
+    private VoteType voteType;
+    @Schema(description = "список тегов")
     private List<TagDto> listTagDto;
-
 
 }
