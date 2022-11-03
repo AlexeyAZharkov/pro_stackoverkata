@@ -1,5 +1,9 @@
 package com.javamentor.qa.platform.service.abstracts.dto;
 
-public interface QuestionDtoService {
+import com.javamentor.qa.platform.models.dto.QuestionDto;
 
+import java.util.Optional;
+
+public interface QuestionDtoService {
+    Optional<QuestionDto> getById(Long questionId, Long authorizedUserId);
 }
