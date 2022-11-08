@@ -66,4 +66,37 @@ public class VoteAnswerServiceImpl extends ReadWriteServiceImpl<VoteAnswer, Long
 
         return voteAnswerDao.countVote(answer.getId());
     }
+
+    @Override
+    @Transactional
+    public Long voteUp(Answer answer, User user, int repCount, VoteType voteType) {
+
+        Optional<VoteAnswer> optionalVoteAnswer = getByUserIdAndAnswerId(answer.getId(), user.getId());
+        VoteAnswer voteAnswer;
+        if (optionalVoteAnswer.isPresent()){
+            voteAnswer = optionalVoteAnswer.get();
+        } else {
+            voteAnswer = new VoteAnswer();
+            voteAnswer.setUser(user);
+            voteAnswer.setAnswer(answer);
+        }
+        voteAnswer.setVoteType(voteType);
+        update(voteAnswer);
+
+        Optional<Reputation> optionalReputation = reputationService.getByAnswerIdAndSenderId(answer.getId(), user.getId());
+        Reputation reputation;
+        if (optionalReputation.isPresent()){
+            reputation = optionalReputation.get();
+        } else {
+            reputation = new Reputation();
+            reputation.setAuthor(answer.getUser());
+            reputation.setSender(user);
+            reputation.setAnswer(answer);
+            reputation.setType(ReputationType.Answer);
+        }
+        reputation.setCount(repCount);
+        reputationService.update(reputation);
+
+        return voteAnswerDao.countVote(answer.getId());
+    }
 }

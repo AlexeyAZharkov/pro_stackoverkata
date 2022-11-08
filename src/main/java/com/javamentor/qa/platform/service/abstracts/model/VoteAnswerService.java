@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface VoteAnswerService extends ReadWriteService<VoteAnswer, Long> {
     Optional<VoteAnswer> getByUserIdAndAnswerId(Long answerId, Long userId);
     Long voteDown(Answer answer, User user, int repCount, VoteType voteType);
+
+    Long voteUp(Answer answer, User user, int repCount, VoteType voteType);
 }
