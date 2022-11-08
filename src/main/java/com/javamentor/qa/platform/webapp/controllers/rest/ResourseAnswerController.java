@@ -38,4 +38,14 @@ public class ResourseAnswerController {
         }
         return ResponseEntity.ok(voteAnswerService.voteDown(optionalAnswer.get(), currentUser, -5, VoteType.DOWN));
     }
+
+    @PostMapping("{id}/upVote")
+    @ApiOperation("Голосование за Answer (увеличение оценки)")
+    public ResponseEntity<Long> upVote (@AuthenticationPrincipal User currentUser, @PathVariable("id") Long answerId){
+        Optional<Answer> optionalAnswer = answerService.getAnswerForVote(answerId, currentUser.getId());
+        if (optionalAnswer.isEmpty()){
+            return new ResponseEntity<>(0L, HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok(voteAnswerService.voteUp(optionalAnswer.get(), currentUser, +10, VoteType.UP));
+    }
 }
