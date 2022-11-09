@@ -1,5 +1,6 @@
 package com.javamentor.qa.platform.service.impl.model;
 
+import com.javamentor.qa.platform.dao.abstracts.model.QuestionDao;
 import com.javamentor.qa.platform.dao.abstracts.repository.ReadWriteDao;
 import com.javamentor.qa.platform.models.entity.question.Question;
 import com.javamentor.qa.platform.models.entity.question.Tag;
@@ -13,10 +14,12 @@ import java.util.List;
 @Service
 public class QuestionServiceImpl extends ReadWriteServiceImpl<Question, Long> implements QuestionService {
     private final TagService tagService;
+    private final QuestionDao questionDao;
 
-    public QuestionServiceImpl(ReadWriteDao<Question, Long> readWriteDao, TagService tagService) {
+    public QuestionServiceImpl(ReadWriteDao<Question, Long> readWriteDao, TagService tagService, QuestionDao questionDao) {
         super(readWriteDao);
         this.tagService = tagService;
+        this.questionDao = questionDao;
     }
 
     @Override
@@ -24,5 +27,10 @@ public class QuestionServiceImpl extends ReadWriteServiceImpl<Question, Long> im
         List<String> listTagName = question.getTags().stream().map(Tag::getName).toList();
         question.setTags(tagService.returnListTagByListTagName(listTagName));
         super.update(question);
+    }
+
+    @Override
+    public Long getCountQuestion() {
+        return questionDao.getCountQuestion();
     }
 }

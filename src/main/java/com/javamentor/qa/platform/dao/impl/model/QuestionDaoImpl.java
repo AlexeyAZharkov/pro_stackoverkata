@@ -14,4 +14,8 @@ public class QuestionDaoImpl extends ReadWriteDaoImpl<Question, Long> implements
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
+    public Long getCountQuestion() {
+        return entityManager.createQuery("select count (q) from Question q where q.isDeleted=false", Long.class).getSingleResult();
+    }
 }
