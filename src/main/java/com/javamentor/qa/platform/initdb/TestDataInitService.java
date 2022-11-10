@@ -26,7 +26,9 @@ public class TestDataInitService {
     private final AnswerService answerService;
     private final ReputationService reputationService;
 
-    public TestDataInitService(UserService userService, RoleService roleService, TagService tagService, QuestionService questionService, AnswerService answerService, ReputationService reputationService) {
+    public TestDataInitService(UserService userService, RoleService roleService, TagService tagService,
+                               QuestionService questionService, AnswerService answerService,
+                               ReputationService reputationService) {
         this.userService = userService;
         this.roleService = roleService;
         this.tagService = tagService;
