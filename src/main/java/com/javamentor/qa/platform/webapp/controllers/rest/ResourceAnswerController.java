@@ -1,7 +1,10 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
+import com.javamentor.qa.platform.dao.abstracts.dto.AnswerDtoDao;
+import com.javamentor.qa.platform.models.dto.question.answer.AnswerDto;
 import com.javamentor.qa.platform.models.dto.question.answer.CommentAnswerDto;
 import com.javamentor.qa.platform.models.entity.user.User;
+import com.javamentor.qa.platform.service.abstracts.dto.AnswerDtoService;
 import com.javamentor.qa.platform.service.abstracts.dto.CommentAnswerDtoService;
 import com.javamentor.qa.platform.service.abstracts.model.AnswerService;
 import com.javamentor.qa.platform.service.abstracts.model.CommentAnswerService;
@@ -18,11 +21,15 @@ public class ResourceAnswerController {
     private final AnswerService answerService;
     private final CommentAnswerDtoService commentAnswerDtoService;
     private final CommentAnswerService commentAnswerService;
+    private final AnswerDtoDao answerDtoDao;
+    private final AnswerDtoService answerDtoService;
 
-    public ResourceAnswerController(AnswerService answerService, CommentAnswerDtoService commentAnswerDtoService, CommentAnswerService commentAnswerService) {
+    public ResourceAnswerController(AnswerService answerService, CommentAnswerDtoService commentAnswerDtoService, CommentAnswerService commentAnswerService, AnswerDtoDao answerDtoDao, AnswerDtoService answerDtoService) {
         this.answerService = answerService;
         this.commentAnswerDtoService = commentAnswerDtoService;
         this.commentAnswerService = commentAnswerService;
+        this.answerDtoDao = answerDtoDao;
+        this.answerDtoService = answerDtoService;
     }
 
     @ApiOperation("Пометка ответа на удаление")
@@ -45,5 +52,19 @@ public class ResourceAnswerController {
         commentAnswerService.addCommentAnswerToDb(answerId, user, comment);
         return new ResponseEntity<>(commentAnswerDtoService.getCommentAnswerDtoByAnswerIdAndUserId(
                 answerId, user).orElse(null), HttpStatus.OK);
+    }
+
+    @ApiOperation("Изменение ответа на вопрос")
+    @PutMapping(value = "/{answerId}")
+    public ResponseEntity<AnswerDto> changeAnswer (@PathVariable("answerId") Long answerId,
+                                                   @RequestBody AnswerDto answerDto) {
+
+        if (answerDto.getId() != answerId) {
+            return (ResponseEntity<AnswerDto>) ResponseEntity.badRequest();
+        }
+
+        answerDtoService.updateAnswerByIdAndDto(answerDto, answerId);
+
+        return ResponseEntity.ok(answerDtoDao.getAnswerDtoByAnswerIdAndUserId(answerId, answerDto.getUserId()).get());
     }
 }

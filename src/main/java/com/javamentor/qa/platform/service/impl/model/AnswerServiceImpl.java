@@ -13,6 +13,7 @@ import java.util.Optional;
 @Service
 public class AnswerServiceImpl extends ReadWriteServiceImpl<Answer, Long> implements AnswerService {
     private final AnswerDao answerDao;
+
     public AnswerServiceImpl(ReadWriteDao<Answer, Long> readWriteDao, AnswerDao answerDao) {
         super(readWriteDao);
         this.answerDao = answerDao;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Repository
@@ -27,5 +28,17 @@ public class AnswerDaoImpl extends ReadWriteDaoImpl<Answer, Long> implements Ans
         return SingleResultUtil.getSingleResultOrNull(query);
     }
 
+    @Override
+    public void updateAnswerById(Answer answer, Long answerId) {
+
+        TypedQuery<Answer> query = entityManager.createQuery("""
+                update Answer a set
+                a.htmlBody = :HtmlBody,
+                a.updateDateTime = :localDateTime
+                where a.id = :answerId""", Answer.class);
+        query.setParameter("HtmlBody", answer.getHtmlBody());
+        query.setParameter("localDateTime", LocalDateTime.now());
+        query.setParameter("answerId", answerId);
+    }
 
 }

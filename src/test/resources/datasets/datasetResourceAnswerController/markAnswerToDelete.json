@@ -1,0 +1,13 @@
+{
+  "Answer": {
+    "id": 100,
+    "user": 100,
+    "question": 100,
+    "htmlBody": "Тело ответа",
+    "persistDateTime": null,
+    "updateDateTime": null,
+    "isHelpful": false,
+    "dateAcceptTime": null,
+    "isDeleted": false
+  }
+}
