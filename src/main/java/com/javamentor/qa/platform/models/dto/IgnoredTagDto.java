@@ -11,12 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Schema(description = "тег")
-public class TagDto {
-    @Parameter(description = "id тега")
+@Schema(description = "игнорируемый тег")
+public class IgnoredTagDto {
+    @Parameter(description = "id игнорируемого тега")
     private Long id;
-    @Schema(description = "имя тега")
+    @Schema(description = "имя игнорируемого тега")
     private String name;
-    @Schema(description = "описание тега")
-    private String description;
 }
