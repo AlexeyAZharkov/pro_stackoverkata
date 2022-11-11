@@ -2,6 +2,7 @@ package com.javamentor.qa.platform.dao.impl.dto;
 
 import com.javamentor.qa.platform.dao.abstracts.dto.TagDtoDao;
 import com.javamentor.qa.platform.models.dto.IgnoredTagDto;
+import com.javamentor.qa.platform.models.dto.RelatedTagDto;
 import com.javamentor.qa.platform.models.dto.TagDto;
 import org.springframework.stereotype.Repository;
 
@@ -36,4 +37,22 @@ public class TagDtoDaoImpl implements TagDtoDao {
                 .setParameter("id", id)
                 .getResultList();
     }
+
+    @Override
+    public List<RelatedTagDto> getTop10RelatedTags(Long tagId) {
+        return entityManager.createQuery("""
+                        SELECT new com.javamentor.qa.platform.models.dto.RelatedTagDto(
+                        t.id,
+                        t.name,
+                        t.questions.size)
+                        from Tag t, RelatedTag rt
+                        where t.id = :id
+                        order by t.questions.size desc""", RelatedTagDto.class)
+                .setParameter("id", tagId)
+                .setMaxResults(10)
+                .getResultList();
+
+    }
+
+
 }
