@@ -1,6 +1,7 @@
 package com.javamentor.qa.platform.webapp.controllers.rest;
 
 import com.javamentor.qa.platform.models.dto.IgnoredTagDto;
+import com.javamentor.qa.platform.models.dto.RelatedTagDto;
 import com.javamentor.qa.platform.models.entity.user.User;
 import com.javamentor.qa.platform.service.abstracts.dto.TagDtoService;
 import io.swagger.annotations.ApiOperation;
@@ -29,5 +30,12 @@ public class ResourceTagController {
     @GetMapping(value = "/ignored")
     public ResponseEntity<List<IgnoredTagDto>> getIgnoredTagByAuthUser(@AuthenticationPrincipal User user) {
         return ResponseEntity.ok(tagDtoService.getIgnoredTagByAuthUser(user.getId()));
+    }
+
+    @ApiOperation("Возвращает список топ-10 child тегов по tagId")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "ТОП-10 тегов найдены")})
+    @GetMapping(value = "/related")
+    public ResponseEntity<List<RelatedTagDto>> getTop10RelatedTags(Long tagId) {
+        return ResponseEntity.ok(tagDtoService.getTop10RelatedTags(tagId));
     }
 }
