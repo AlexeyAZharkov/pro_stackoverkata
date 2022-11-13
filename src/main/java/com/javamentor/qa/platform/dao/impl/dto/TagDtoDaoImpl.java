@@ -44,8 +44,8 @@ public class TagDtoDaoImpl implements TagDtoDao {
                         SELECT new com.javamentor.qa.platform.models.dto.RelatedTagDto(
                         t.id,
                         t.name,
-                        t.questions.size)
-                        from Tag t, RelatedTag rt
+                        count(t.questions))
+                        from Tag t
                         where t.id = :id
                         order by t.questions.size desc""", RelatedTagDto.class)
                 .setParameter("id", tagId)
@@ -53,6 +53,5 @@ public class TagDtoDaoImpl implements TagDtoDao {
                 .getResultList();
 
     }
-
 
 }
